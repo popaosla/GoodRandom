@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodRandom - Рандомайзер чисел</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" href="../image/my-GR.png">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="../index.html">
+            <img src="../image/my-GR.png" alt="Логотип">
+        </a>
+    </div>
+    <div class="menu">
+        <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+        <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+        <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+        <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+    </div>
+    <div class="toggle-btn" onclick="toggleMobileMenu()">☰</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+    <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+    <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+    <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+</div>
+
+<script>
+    let mobileMenuOpen = false;
+
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenuOpen = !mobileMenuOpen;
+        mobileMenu.classList.toggle('show-mobile-menu', mobileMenuOpen);
+    }
+
+    window.onresize = function() {
+        if (window.innerWidth > 768) {
+            // Закрыть мобильное меню при расширении окна
+            mobileMenuOpen = false;
+            document.getElementById("mobileMenu").classList.remove('show-mobile-menu');
+        }
+    }
+</script>
+<h1>Случайные числа:</h1>
+<div class="generator-results" id="results">Результаты появятся здесь</div>
+<div class="generator">
+    <label for="count">Введите количество нужных чисел (до 50):</label>
+    <input type="number" id="count" value="1" min="1" max="50">
+    <p>Введите диапазон генериремых чисел</p>
+    <label for="min">от:</label>
+    <input type="number" id="min" value="1" min="0">
+    <label for="max">до:</label>
+    <input type="number" id="max" value="100" min="0"><br><br>
+    <button onclick="generateRandomNumbers()">Сгенерировать</button>
+</div>
+
+<script>
+    function generateRandomNumbers() {
+        const min = parseInt(document.getElementById("min").value, 10);
+        const max = parseInt(document.getElementById("max").value, 10);
+        const count = parseInt(document.getElementById("count").value, 10);
+        const results = [];
+
+        if (count > 50) {
+                alert("Количество не может превышать 50.");
+                return;
+            }
+
+        for (let i = 0; i < count; i++) {
+            const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+            results.push(randomNum);
+        }
+
+        document.getElementById("results").textContent = results.join(", ");
+    }
+</script>
+</body>
+</html>
+
+</body>
+</html>

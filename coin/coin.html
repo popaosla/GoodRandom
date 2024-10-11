@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodRandom - Монетка</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" href="../image/my-GR.png">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="../index.html">
+            <img src="../image/my-GR.png" alt="Логотип">
+        </a>
+    </div>
+    <div class="menu">
+        <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+        <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+        <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+        <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+    </div>
+    <div class="toggle-btn" onclick="toggleMobileMenu()">☰</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+    <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+    <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+    <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+</div>
+
+<script>
+    let mobileMenuOpen = false;
+
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenuOpen = !mobileMenuOpen;
+        mobileMenu.classList.toggle('show-mobile-menu', mobileMenuOpen);
+    }
+
+    window.onresize = function() {
+        if (window.innerWidth > 768) {
+            // Закрыть мобильное меню при расширении окна
+            mobileMenuOpen = false;
+            document.getElementById("mobileMenu").classList.remove('show-mobile-menu');
+        }
+    }
+</script>
+<h1>Подкините монетку</h1>
+<img id="coinImage" src="../image/reshka_ru.png" alt="Монета">
+<br><br>
+<select id="coinSelect">
+    <option value="ru">Рубль</option>
+    <option value="dollar">Доллар</option>
+    <option value="ussr">Советский рубль</option>
+    <option value="imperial">Имперский рубль</option>
+    <option value="funt">Фунт</option>
+</select>
+<br>
+<button onclick="tossCoin()">Подкинуть монетку</button>
+<p id="result"></p>
+
+<script>
+    const coins = {
+        ru: ["../image/orel_ru.png", "../image/reshka_ru.png"],
+        dollar: ["../image/orel_dollar.png", "../image/reshka_dollar.png"],
+        ussr: ["../image/orel_ussr.png", "../image/reshka_ussr.png"],
+        imperial: ["../image/orel_imper.png", "../image/reshka_imper.png"],
+        funt: ["../image/orel_funt.png", "../image/reshka_funt.png"]
+    };
+    
+    function tossCoin() {
+        const coinType = document.getElementById("coinSelect").value;
+        const coinImages = coins[coinType];
+        let resultElement = document.getElementById("result");
+        let coinImageElement = document.getElementById("coinImage");
+        resultElement.textContent = "Подкидываем...";
+        let tossCount = Math.floor(Math.random() * 4) + 4; // 4 to 7 times
+        let currentState = 0;
+
+        function changeImage() {
+            if (tossCount > 0) {
+                currentState = 1 - currentState; // Alternate between 0 and 1
+                coinImageElement.src = coinImages[currentState];
+                tossCount--;
+                setTimeout(changeImage, 200);
+            } else {
+                const side = currentState === 0 ? "Орел" : "Решка";
+                resultElement.textContent = "Выпало: " + side;
+            }
+        }
+        changeImage();
+    }
+</script>
+
+</body>
+</html>

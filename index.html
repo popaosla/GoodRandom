@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodRandom</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" href="image/my-GR.png">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="index.html">
+            <img src="image/my-GR.png" alt="Логотип">
+        </a>
+    </div>
+    <div class="menu">
+        <a href="numbers/numbers.html"><img src="image/my-123.png" alt="Иконка 1">Числа</a>
+        <a href="coin/coin.html"><img src="image/coin.png" alt="Иконка 2">Монетка</a>
+        <a href="dice/dice.html"><img src="image/cube.png" alt="Иконка 3">Кости</a>
+        <a href="sharik/sharik.html"><img src="image/sharik.png" alt="Иконка 4">Шар</a>
+    </div>
+    <div class="toggle-btn" onclick="toggleMobileMenu()">☰</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="/numbers/numbers.html"><img src="image/my-123.png" alt="Иконка 1">Числа</a>
+    <a href="/coin/coin.html"><img src="image/coin.png" alt="Иконка 2">Монетка</a>
+    <a href="dice/dice.html"><img src="image/cube.png" alt="Иконка 3">Кости</a>
+    <a href="sharik/sharik.html"><img src="image/sharik.png" alt="Иконка 4">Шар</a>
+</div>
+
+<script>
+    let mobileMenuOpen = false;
+
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenuOpen = !mobileMenuOpen;
+        mobileMenu.classList.toggle('show-mobile-menu', mobileMenuOpen);
+    }
+
+    window.onresize = function() {
+        if (window.innerWidth > 768) {
+            // Закрыть мобильное меню при расширении окна
+            mobileMenuOpen = false;
+            document.getElementById("mobileMenu").classList.remove('show-mobile-menu');
+        }
+    }
+</script>
+<h1>GoodRandom</h1>
+<p>
+    Добро пожаловать на сайт GoodRandom!<br> Здесь вы найдете увлекательные и полезные инструменты для принятия решений и развлечений.  Наш сайт - это отличный выход, если вы вдруг захотели сыграть в кости, подкинуть монетку, узнать случайное число или даже получить предсказания и ответы на все вопросы от нашего шара предсказаний. 
+<br>
+<br>
+    <b>GoodRandom - это ваш надежный помощник в рандоме. Присоединяйтесь к нам и откройте для себя новые, или не очень новые, возможности!</b>
+    <br><br>
+    <b>Если ты хочешь опробовать наши возможности, но не знаешь с чего начать, жми на кнопку "Перейти на сайт", и попади на случайный раздел нашего сайта!</b>
+    <br><br>
+    <script>
+        function goToRandomPage() {
+            const pages = [
+                'number/numbers.html',
+                'coin/coin.html',
+                'dice/dice.html',
+                'sharik/sharik.html'
+            ];
+            const randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+    </script>
+    <button onclick="goToRandomPage()">Перейти на сайт</button>
+</p>
+</body>
+</html>

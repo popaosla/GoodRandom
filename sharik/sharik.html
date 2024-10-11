@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodRandom - Шар предсказаний</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" href="../image/my-GR.png">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="../index.html">
+            <img src="../image/my-GR.png" alt="Логотип">
+        </a>
+    </div>
+    <div class="menu">
+        <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+        <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+        <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+        <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+    </div>
+    <div class="toggle-btn" onclick="toggleMobileMenu()">☰</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+    <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+    <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+    <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+</div>
+
+
+<script>
+    let mobileMenuOpen = false;
+
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenuOpen = !mobileMenuOpen;
+        mobileMenu.classList.toggle('show-mobile-menu', mobileMenuOpen);
+    }
+
+    window.onresize = function() {
+        if (window.innerWidth > 768) {
+            // Закрыть мобильное меню при расширении окна
+            mobileMenuOpen = false;
+            document.getElementById("mobileMenu").classList.remove('show-mobile-menu');
+        }
+    }
+</script>
+<h1 id="header">Шар ожидает вопрос</h2>
+
+
+<div class="magic-ball">
+  <div id="answer">Здесь будет предсказание</div>
+</div>
+<p></p>
+<input type="text" id="questionInput" placeholder="Введите свой вопрос..."><br>
+<button id="askButton">Спросить</button>
+
+<script>
+  const answers = [
+    "Бесспорно",
+    "Предрешено",
+    "Никаких сомнений",
+    "Определённо да",
+    "Можешь быть уверен в этом",
+    "Мне кажется — «да»",
+    "Вероятнее всего",
+    "Хорошие перспективы",
+    "Знаки говорят — «да»",
+    "Да",
+    "Пока не ясно, попробуй снова",
+    "Спроси позже",
+    "Лучше не рассказывать",
+    "Сейчас нельзя предсказать",
+    "Даже не думай",
+    "Мой ответ — «нет»",
+    "По моим данным — «нет»",
+    "Перспективы не очень хорошие",
+    "Весьма сомнительно",
+    "Определённо нет",
+    "Нет"
+  ];
+
+  document.getElementById('askButton').addEventListener('click', function() {
+    const question = document.getElementById('questionInput').value.trim();
+    if (question === "") {
+      alert("Пожалуйста, введите вопрос.");
+      return;
+    }
+    const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
+    document.getElementById('answer').textContent = randomAnswer;
+    document.getElementById('header').textContent = "Шар ответил:";
+  });
+</script>
+
+
+</body>
+</html>

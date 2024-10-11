@@ -1,0 +1,167 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+html{
+    background-image:url(../image/bg3.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    background-image: url(../image/fon.jpg);
+}
+.magic-ball {
+    position: relative;
+    margin: 50px auto;
+    width: 260px;
+    height: 260px;
+    background-color: #000;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 3px rgba(0,0,0,0.5);
+}
+.magic-ball::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 180px;
+    background-color: #444;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    box-shadow: inset 0 0 25px 5px rgba(0,0,0,0.5);
+}
+#answer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160px;
+    padding: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+#questionInput {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border-color: rgba(0, 0, 0, 0.479);
+    background-color: rgba(192, 192, 192, 0.164);
+}
+#questionInput:hover{
+    border-color:#000;
+}
+#askButton {
+    margin-top:20px;
+    background-color: rgb(124, 124, 124);
+    color:rgba(0, 0, 0, 0.918);
+    padding: 30px 90px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size:larger;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.918),
+    inset  -3px -3px 20px 5px rgba(0, 0, 0, 0.918);
+}
+#askButton:hover{
+    color:white;
+}
+#askButton:active{
+    padding: 29px 88px;
+    color:white;
+    border-radius: 9.5px;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.918),
+    inset 2px 2px 20px 5px rgba(0, 0, 0, 0.918);
+}
+
+.logo {
+    margin-right: auto;
+}
+.logo img {
+    height: 50px;
+}
+h1{
+    margin-top: 2%;
+    text-align: center;
+    font-size: 50;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.menu a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    text-align: center;
+}
+
+.menu a img {
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+}
+.mobile-menu {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 50px;
+    background-color: #cccccc6e;
+    position: relative;
+    width: 100%;
+}
+.mobile-menu a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    text-align: center;
+}
+.mobile-menu a img {
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+/* Отображение кнопки для мобильного меню */
+.toggle-btn {
+    cursor: pointer;
+    margin-left: 20px;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+
+    .toggle-btn {
+        display: block;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+
+    .show-mobile-menu {
+        display: flex;
+    }
+}

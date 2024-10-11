@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodRandom - Кости</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" href="../image/my-GR.png">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="../index.html">
+            <img src="../image/my-GR.png" alt="Логотип">
+        </a>
+    </div>
+    <div class="menu">
+        <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+        <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+        <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+        <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+    </div>
+    <div class="toggle-btn" onclick="toggleMobileMenu()">☰</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="../numbers/numbers.html"><img src="../image/my-123.png" alt="Иконка 1">Числа</a>
+    <a href="../coin/coin.html"><img src="../image/coin.png" alt="Иконка 2">Монетка</a>
+    <a href="../dice/dice.html"><img src="../image/cube.png" alt="Иконка 3">Кости</a>
+    <a href="../sharik/sharik.html"><img src="../image/sharik.png" alt="Иконка 4">Шар</a>
+</div>
+
+<script>
+    let mobileMenuOpen = false;
+
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenuOpen = !mobileMenuOpen;
+        mobileMenu.classList.toggle('show-mobile-menu', mobileMenuOpen);
+    }
+
+    window.onresize = function() {
+        if (window.innerWidth > 768) {
+            // Закрыть мобильное меню при расширении окна
+            mobileMenuOpen = false;
+            document.getElementById("mobileMenu").classList.remove('show-mobile-menu');
+        }
+    }
+</script>
+
+        <h1>Бросок Костей</h1>
+        <div id="message"><strong>Здесь будет ваш результат</strong></div>
+        <div class="dice-container" id="diceContainer"></div>
+            <label for="numDice">Выберите количество бросаемых костей:</label>
+            <select id="numDice" name="numDice">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select> 
+            <br>
+        <button id="rollButton">Бросить</button>
+
+
+
+    <script>
+        const rollButton = document.getElementById('rollButton');
+        const numDiceSelect = document.getElementById('numDice');
+        const messageDiv = document.getElementById('message');
+        const diceContainer = document.getElementById('diceContainer');
+
+        const diceImages = [
+            '../image/dice-1.png',
+            '../image/dice-2.png',
+            '../image/dice-3.png',
+            '../image/dice-4.png',
+            '../image/dice-5.png',
+            '../image/dice-6.png',  
+        ];
+
+        // Функция для создания элементов костей
+        function createDiceElements(count) {
+            diceContainer.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+    const img = document.createElement('img');
+    img.src = diceImages[0]; // Начальное изображение
+    img.classList.add('dice');
+    img.id = `die-${i}`;
+    diceContainer.appendChild(img);
+}
+}
+
+// Инициализация с одной костью
+createDiceElements(1);
+
+rollButton.addEventListener('click', () => {
+let numDice = parseInt(numDiceSelect.value);
+if (isNaN(numDice) || numDice < 1) numDice = 1;
+if (numDice > 10) numDice = 10;
+numDiceSelect.value = numDice;
+
+messageDiv.textContent = 'Бросаем ваши кости...';
+diceContainer.innerHTML = ''; // Сброс предыдущих костей
+
+createDiceElements(numDice);
+
+const diceElements = [];
+for (let i = 0; i < numDice; i++) {
+    diceElements.push(document.getElementById(`die-${i}`));
+}
+
+const totalChanges = Math.floor(Math.random() * 4) + 4; 
+let currentChange = 0;
+
+const changeInterval = setInterval(() => {
+    diceElements.forEach(die => {
+        const randomIndex = Math.floor(Math.random() * 6);
+        die.src = diceImages[randomIndex];
+    });
+    currentChange++;
+    if (currentChange >= totalChanges) {
+        clearInterval(changeInterval);
+        finalizeRoll();
+    }
+}, 200);
+});
+
+function finalizeRoll() {
+const numDice = diceContainer.children.length;
+const finalResults = [];
+for (let i = 0; i < numDice; i++) {
+    const randomValue = Math.floor(Math.random() * 6);
+    finalResults.push(randomValue + 1);
+    const die = document.getElementById(`die-${i}`);
+    die.src = diceImages[randomValue];
+}
+
+messageDiv.innerHTML = `<strong>Результаты броска:</strong> ${finalResults.join(', ')}`;
+
+}
+</script>
+
+</body>
+</html>
